@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useContext } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
-import { TodoContext } from '../src/todoContext';
+import { TodoContext } from '../todoContext';
 
 export default function UpdateSetTodo({originaltodo, setModal, showModal}) {
   const [newName, setNewName] = useState(originaltodo.bookName);

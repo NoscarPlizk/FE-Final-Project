@@ -3,10 +3,9 @@ import { BrowserRouter, Outlet, Routes, Route } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { TodoContext } from './todoContext';
 import useLocalStorage from 'use-local-storage';
-import Home from '../pages/Home';
-import Addtodos from '../pages/AddTodos';
-import ErrorPage from '../pages/ErrorPage';
-
+import Home from './pages/Home';
+import Addtodos from './pages/AddTodos';
+import ErrorPage from './pages/ErrorPage';
 
 function Layout() {
   return (

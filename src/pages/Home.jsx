@@ -1,6 +1,6 @@
 import { Container, Row } from "react-bootstrap";
 import { useContext } from "react";
-import { TodoContext } from '../src/todoContext';
+import { TodoContext } from '../todoContext';
 import Cards from "../components/Cards";
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <Container>
       <h1 className='mt-4 mb-3'>
-        This is my Book List
+        MyTodoist
       </h1>
       <Row>
         <CardGroup todolist={todo} />
