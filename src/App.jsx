@@ -14,7 +14,7 @@ function Layout() {
         <Container>
           <Navbar.Brand href="/">Home</Navbar.Brand>
           <Nav>
-            <Nav.Link href='/addtodos'>Add Todos</Nav.Link>
+            {/* <Nav.Link href='/addtodos'>Add Todos</Nav.Link> */}
           </Nav>
         </Container>
       </Navbar>
