@@ -1,46 +1,30 @@
-import { useState, useContext } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
-import { TodoContext } from '../todoContext';
-import FormTodo from '../FormTodo';
+import { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
+import PercentageCal from './components/PercentageCal';
 
-export default function Addtodos({ closeWindows }) {
-  // const [ bookName, setBookName ] = useState('');
-  // const [ description, setDescription ] = useState('');
-  // const [ currentReadBookPage, setCurrentReadBookPage ] = useState('');
-  // const [ maximumBookPage, setMaximumBookPage ] = useState('');
-  // const [ notes, setNote ] = useState('');
-  const todo = useContext(TodoContext).todo;
-  const setTodo = useContext(TodoContext).setTodo;
-  
-  function ExecuteAddTodo(
-    bookName, description, currentReadBookPage, maximumBookPage, notes
-  ) {
-    
-    const saveTodo = {
-      id: Date.now(), 
-      bookName: bookName, 
-      description: description,
-      currentReadBookPage: currentReadBookPage,
-      maximumBookPage: maximumBookPage,
-      notes: notes
-    }
+// function PercentageCal({ CurReadBookPage, MaxBookPage }) {
+//   const NUM = CurReadBookPage / MaxBookPage;
 
-    console.log({ saveTodo: saveTodo });
-    setTodo([ ...todo, saveTodo ]);
-  }
+//   return (
+//     <div>
+//       { NUM > 0 ? (NUM * 100).toFixed(2) : 0 } %
+//     </div>
+//   )
+// }
+
+export default function FormTodo({ 
+  originaltodo, buttonExecuteFunction, closeWindows,
+}) {
+   
+  const [ bookName, setBookName ] = useState(originaltodo.bookName ?? '');
+  const [ description, setDescription ] = useState(originaltodo.description ?? '');
+  const [ currentReadBookPage, setCurrentReadBookPage ] = useState(originaltodo.currentReadBookPage ?? '');
+  const [ maximumBookPage, setMaximumBookPage ] = useState(originaltodo.maximumBookPage ?? '');
+  const [ notes, setNote ] = useState(originaltodo.notes && '');
 
   return (
     <div className='p-3'>
-      <FormTodo 
-        originaltodo={todo} 
-        buttonExecuteFunction={ExecuteAddTodo}
-        closeWindows={closeWindows}
-      />
-    </div>
-  );
-}
-
-      {/* <div className='d-flex justify-content-between mb-3'>
+      <div className='d-flex justify-content-between mb-3'>
         <h3 className='mt-5'>Add Your Book List</h3>
         <button onClick={closeWindows}>X</button>
       </div>
@@ -48,8 +32,6 @@ export default function Addtodos({ closeWindows }) {
         <Form 
           onSubmit={(event) => {
             event.preventDefault();
-            console.log({ saveTodo: saveTodo });
-            setTodo([ ...todo, saveTodo ]);
             closeWindows();
           }}
           className='vstack gap-2'
@@ -94,7 +76,7 @@ export default function Addtodos({ closeWindows }) {
               <div>
                 <div>Completed Percentage</div>
                 <div>
-                  <PagePercentageCal 
+                  <PercentageCal 
                     CurReadBookPage={currentReadBookPage} 
                     MaxBookPage={maximumBookPage}
                   />
@@ -110,8 +92,17 @@ export default function Addtodos({ closeWindows }) {
               onChange={(e) => setNote(e.target.value)}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button 
+            variant="primary" 
+            type="submit"
+            onClick={() => buttonExecuteFunction( 
+              bookName, description, currentReadBookPage, maximumBookPage, notes
+            )}
+          >
             Submit
           </Button>
         </Form>
-      </div> */}
+      </div>
+    </div>
+  );
+}

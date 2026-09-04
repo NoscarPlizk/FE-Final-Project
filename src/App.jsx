@@ -24,7 +24,7 @@ function Layout() {
 }
 
 export default function App() {
-  const [todo, setTodo] = useLocalStorage('data', []);
+  const [ todo, setTodo ] = useLocalStorage('data', []);
   
   return (
     <TodoContext.Provider value={{ todo, setTodo }}>
@@ -32,7 +32,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="addtodos" element={<Addtodos />} />
+            {/* <Route path="addtodos" element={<Addtodos />} /> */}
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>

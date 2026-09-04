@@ -15,11 +15,16 @@ function CardGroup({ todolist }) {
     );
   }
 
-  return todolist.map((todos) => {
-    return (
-      <Cards todos={todos} deleteTodo={deleteTodo}/>
-    );
-  });
+  return (
+    <div className="row row-cols-3 gap-3">
+      {todolist.map((todos) => {
+        return (
+          <Cards todos={todos} deleteTodo={deleteTodo}/>
+        );
+      })}
+    </div>
+
+  )
 }
 
 export default function Home() {
