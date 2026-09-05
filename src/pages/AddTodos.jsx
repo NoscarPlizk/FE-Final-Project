@@ -4,21 +4,22 @@ import { TodoContext } from '../todoContext';
 import FormTodo from '../FormTodo';
 
 export default function Addtodos({ closeWindows }) {
-  // const [ bookName, setBookName ] = useState('');
-  // const [ description, setDescription ] = useState('');
-  // const [ currentReadBookPage, setCurrentReadBookPage ] = useState('');
-  // const [ maximumBookPage, setMaximumBookPage ] = useState('');
-  // const [ notes, setNote ] = useState('');
   const todo = useContext(TodoContext).todo;
   const setTodo = useContext(TodoContext).setTodo;
   
   function ExecuteAddTodo(
-    bookName, description, currentReadBookPage, maximumBookPage, notes
+    bookName, 
+    authorName,
+    description, 
+    currentReadBookPage, 
+    maximumBookPage, 
+    notes
   ) {
     
     const saveTodo = {
       id: Date.now(), 
       bookName: bookName, 
+      authorName: authorName,
       description: description,
       currentReadBookPage: currentReadBookPage,
       maximumBookPage: maximumBookPage,

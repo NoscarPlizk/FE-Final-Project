@@ -13,10 +13,13 @@ export default function UpdateSetTodo({
 
   function updateTodo(
     bookName, 
+    authorName,
     description, 
     currentReadBookPage, 
-    maximumBookPage
+    maximumBookPage,
+    notes
   ){
+
     setTodo(prev => {
       const updatedTodos = prev.map(t => {
         if (t.id !== idtodos) return t;
@@ -24,9 +27,11 @@ export default function UpdateSetTodo({
         return {
           ...t,
           bookName,
+          authorName,
           description,
           currentReadBookPage,
-          maximumBookPage
+          maximumBookPage,
+          notes
         };
       });
 

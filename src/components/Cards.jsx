@@ -5,9 +5,10 @@ import PercentageCal from "./PercentageCal";
 
 function MainInfoComp({ todos }) {
   return (
-    <div>
-      <h1>{todos.bookName}</h1>
-      <div>Description: {todos.description}</div>
+    <div className="border rounded-2 p-1">
+      <h2>{todos.bookName}</h2>
+      <div>{todos.authorName}</div>
+      <div>Target: {todos.description}</div>
       <div>Notes: {todos.notes}</div>
     </div>
   )
@@ -17,59 +18,64 @@ function PercentageComp({ todos }) {
   return (
     <div 
       className="
-        d-flex 
-        flex-column 
-        align-items-center
+        border rounded-2 p-1
+        d-flex justify-content-between 
       "
     >
       <div>
-        <h3>
+        <h4>
           <PercentageCal 
             CurReadBookPage={todos.currentReadBookPage}
             MaxBookPage={todos.maximumBookPage}
           />
-        </h3>
+        </h4>
       </div>
-      <div>Current Page: {todos.currentReadBookPage}</div>
-      <div>Maximum Page: {todos.maximumBookPage}</div>
+      <div>
+        <div>Current Page: {todos.currentReadBookPage}</div>
+        <div>Maximum Page: {todos.maximumBookPage}</div>
+      </div>
     </div>
   )
 }
 
 function ButtonComp({ todos, setModal, deleteTodo }) {
   return (
-    <div className="d-flex flex-column gap-2">
+    <div className="d-flex justify-content-end gap-1">
       <Button 
         variant="primary" 
+        className="w-25"
         onClick={() => setModal(true)}
       >
         Edit
       </Button>
       <Button 
         variant="danger" 
+        className="w-25"
         onClick={() => deleteTodo(todos.id)}
       >
         Delete
       </Button>
-      <Button 
-        variant="warning" 
-        // onClick={}
-      >
-        Complete
-      </Button>
+      { todos.currentReadBookPage === todos.maximumBookPage &&
+        <Button 
+          variant="warning" 
+          // onClick={}
+        >
+          Complete
+        </Button>
+      }
     </div>
   )
 }
 
-export default function Cards({todos, deleteTodo}){
+export default function Cards({ todos, deleteTodo }){
   const [showModal, setModal] = useState(false);
   
   return (
-    <div 
-      className="
-        border 
-        d-flex justify-content-between 
-        gap-2 p-3
+    <div className="
+      border rounded-3
+      shadow-sm
+      d-flex flex-column 
+      gap-2 p-3
       "
     >
       <UpdateSetTodo 
@@ -77,16 +83,8 @@ export default function Cards({todos, deleteTodo}){
         showModal={showModal} 
         setModal={setModal}
       />
-      <div
-        className="
-          border
-          d-flex justify-content-between
-          flex-grow-1
-        "
-      >
-        <MainInfoComp todos={todos} />
-        <PercentageComp todos={todos} />
-      </div>
+      <MainInfoComp todos={todos} />
+      <PercentageComp todos={todos} />
       <ButtonComp 
         todos={todos} 
         setModal={setModal} 

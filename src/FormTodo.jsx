@@ -2,21 +2,12 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import PercentageCal from './components/PercentageCal';
 
-// function PercentageCal({ CurReadBookPage, MaxBookPage }) {
-//   const NUM = CurReadBookPage / MaxBookPage;
-
-//   return (
-//     <div>
-//       { NUM > 0 ? (NUM * 100).toFixed(2) : 0 } %
-//     </div>
-//   )
-// }
-
 export default function FormTodo({ 
   originaltodo, buttonExecuteFunction, closeWindows,
 }) {
    
   const [ bookName, setBookName ] = useState(originaltodo.bookName ?? '');
+  const [ authorName, setAuthorName ] = useState(originaltodo.authorName ?? '');
   const [ description, setDescription ] = useState(originaltodo.description ?? '');
   const [ currentReadBookPage, setCurrentReadBookPage ] = useState(originaltodo.currentReadBookPage ?? '');
   const [ maximumBookPage, setMaximumBookPage ] = useState(originaltodo.maximumBookPage ?? '');
@@ -43,6 +34,15 @@ export default function FormTodo({
               onChange={(e) => setBookName(e.target.value)} 
               type="word" 
               placeholder="Put Book Name"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Author Name</Form.Label>
+            <Form.Control 
+              value={authorName}
+              onChange={(e) => setAuthorName(e.target.value)}
+              type='word'
+              placeholder='Put Author Name'
             />
           </Form.Group>
           <Form.Group className='mb-2'>
@@ -96,7 +96,12 @@ export default function FormTodo({
             variant="primary" 
             type="submit"
             onClick={() => buttonExecuteFunction( 
-              bookName, description, currentReadBookPage, maximumBookPage, notes
+              bookName, 
+              authorName,
+              description, 
+              currentReadBookPage, 
+              maximumBookPage, 
+              notes
             )}
           >
             Submit
