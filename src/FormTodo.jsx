@@ -13,6 +13,11 @@ export default function FormTodo({
   const [ maximumBookPage, setMaximumBookPage ] = useState(originaltodo.maximumBookPage ?? '');
   const [ notes, setNote ] = useState(originaltodo.notes && '');
 
+  const isPageOverMaximum =
+    currentReadBookPage !== "" &&
+    maximumBookPage !== "" &&
+    Number(currentReadBookPage) > Number(maximumBookPage);
+
   return (
     <div className='p-3'>
       <div className='d-flex justify-content-between mb-3'>
@@ -62,15 +67,30 @@ export default function FormTodo({
                 <Form.Control 
                   type="number" 
                   value={currentReadBookPage}
-                  onChange={(e) => setCurrentReadBookPage(e.target.value)}
+                  min={0}
+                  max={maximumBookPage}
+                  isInvalid={isPageOverMaximum}
+                  onChange={(e) => {
+                    const value = Number(e.target.value);
+
+                    if (value < 0) {
+                      setCurrentReadBookPage(0);
+                    } else {
+                      setCurrentReadBookPage(value)
+                    }                
+                  }}
                 />
+                <Form.Control.Feedback type="invalid">
+                  Current page cannot exceed the maximum page.
+                </Form.Control.Feedback>
               </div>
               <div>
                 <div>Maximum Page</div>
                 <Form.Control 
-                  type="number" 
+                  type="number"
+                  min={0}
                   value={maximumBookPage}
-                  onChange={(e) => setMaximumBookPage(e.target.value)}
+                  onChange={(e) => setMaximumBookPage(Number(e.target.value))}
                 />
               </div>
               <div>

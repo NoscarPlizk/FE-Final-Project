@@ -23,7 +23,8 @@ export default function Addtodos({ closeWindows }) {
       description: description,
       currentReadBookPage: currentReadBookPage,
       maximumBookPage: maximumBookPage,
-      notes: notes
+      notes: notes,
+      isfullyCompleted: false
     }
 
     console.log({ saveTodo: saveTodo });

@@ -16,12 +16,27 @@ function CardGroup({ todolist }) {
   }
 
   return (
-    <div className="row row-cols-3 gap-3">
-      {todolist.map((todos) => {
-        return (
-          <Cards todos={todos} deleteTodo={deleteTodo}/>
-        );
-      })}
+    <div className="d-flex flex-column gap-3">
+      <div className="border">
+        <h3>In Progressing</h3>
+        <div className="row row-cols-3">
+          {todolist
+            .filter(todos => todos.isfullyCompleted === false)
+            .map((todos, index) => {
+              return (
+                <div key={index} className="mb-4">
+                  <Cards todos={todos} deleteTodo={deleteTodo}/>
+                </div>
+              );
+          })}
+        </div>
+      </div>
+      <div className="border">
+        <h3>Completed</h3>
+        <div>
+
+        </div>
+      </div>
     </div>
 
   )
@@ -35,12 +50,20 @@ export default function Home() {
   const handleClose = () => setShowModal(false);
 
   return (
-    <Container>
-      <div className="d-flex justify-content-between">
+    <Container className="d-flex flex-column gap-3">
+      <div className="
+        d-flex justify-content-between align-items-center
+        border
+        "
+      >
         <h1 className='mt-4 mb-3'>
           MyBookist
         </h1>
-        <button onClick={handleShow}>
+        <button 
+          className="rounded-3"
+          style={{ width: '100px', height: '60px'}}
+          onClick={handleShow}
+        >
           Add Task
         </button>
       </div>
