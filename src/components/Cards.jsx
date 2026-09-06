@@ -38,26 +38,9 @@ function PercentageComp({ todos }) {
   )
 }
 
-function ButtonComp({ todos, setTodo, setModal, deleteTodo }) {
-
-  function updateCompleted() {
-    setTodo(prev => {
-      const updatedTodos = prev.map(t => {
-        if (t.id !== todos.id) return t;
-
-        return {
-          ...t,
-          isfullyCompleted: true
-        };
-      });
-
-      console.log("updated todo list:", updatedTodos);
-
-      return updatedTodos;
-    });
-  }
-
-
+function ButtonComp({ 
+  todos, setModal, deleteTodo, setCompletedFunction, setCompletedButtonWord 
+}) {
   return (
     <div className="d-flex justify-content-end gap-1">
       <Button 
@@ -77,17 +60,26 @@ function ButtonComp({ todos, setTodo, setModal, deleteTodo }) {
       { todos.currentReadBookPage === todos.maximumBookPage &&
         <Button 
           variant="warning" 
-          onClick={() => updateCompleted()}
+          onClick={() => setCompletedFunction(todos)}
         >
-          Complete
+          {setCompletedButtonWord}
         </Button>
       }
     </div>
   )
 }
 
-export default function Cards({ todos, setTodo, deleteTodo }){
+export default function Cards({ 
+  todos, setTodo, setCompletedFunction, setCompletedButtonWord 
+}){
+
   const [showModal, setModal] = useState(false);
+
+  function deleteTodo(currenttodo) {
+    setTodo(data => 
+      data.filter(todo => todo.id !== currenttodo)
+    );
+  }
   
   return (
     <div className="
@@ -106,9 +98,10 @@ export default function Cards({ todos, setTodo, deleteTodo }){
       <PercentageComp todos={todos} />
       <ButtonComp 
         todos={todos}
-        setTodo={setTodo}
         setModal={setModal} 
         deleteTodo={deleteTodo}
+        setCompletedFunction={setCompletedFunction}
+        setCompletedButtonWord={setCompletedButtonWord}
       />
     </div>
   )

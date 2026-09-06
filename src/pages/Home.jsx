@@ -5,19 +5,88 @@ import Cards from "../components/Cards";
 
 import Addtodos from "./AddTodos";
 
+function CardSectors({ 
+  name, todolist, setTodo, 
+  setCompletedValue, setCompletedFunction, setCompletedButtonWord, 
+  setUnavaliableText 
+}) {
+  return (
+    <div className="border">
+      <h3>{name}</h3>
+      { todolist.filter(todos => todos.isfullyCompleted === setCompletedValue).length > 0 ?
+        <div className="row row-cols-3">
+          {todolist
+            .filter(todos => todos.isfullyCompleted === setCompletedValue)
+            .map((todos) => {
+              return (
+                <div key={todos.id} className="mb-4">
+                  <Cards 
+                    todos={todos} 
+                    setTodo={setTodo}
+                    setCompletedFunction={setCompletedFunction}
+                    setCompletedButtonWord={setCompletedButtonWord}
+                  />
+                </div>
+              );
+          })}
+        </div> 
+        : <div>{setUnavaliableText}</div>
+      }
+    </div>      
+  )
+}
+
+
 
 function CardGroup({ todolist }) {
   const setTodo = useContext(TodoContext).setTodo;
   
-  function deleteTodo(currenttodo) {
-    setTodo(data => 
-      data.filter(todo => todo.id !== currenttodo)
-    );
+  function updateCompleted(todos) {
+    setTodo(prev => {
+      const updatedTodos = prev.map(t => {
+        if (t.id !== todos.id) return t;
+
+        return {
+          ...t,
+          isfullyCompleted: true
+        };
+      });
+
+      console.log("updated todo list:", updatedTodos);
+
+      return updatedTodos;
+    });
+  }
+
+  function revokeCompleted(todos) {
+    setTodo(prev => {
+      const updatedTodos = prev.map(t => {
+        if (t.id !== todos.id) return t;
+
+        return {
+          ...t,
+          isfullyCompleted: false
+        };
+      });
+
+      console.log("updated todo list:", updatedTodos);
+
+      return updatedTodos;
+    });
   }
 
   return (
     <div className="d-flex flex-column gap-3">
-      <div className="border">
+      <CardSectors
+        name={'In Progressing'}
+        todolist={todolist}
+        setTodo={setTodo}
+        setCompletedValue={false}
+        setCompletedFunction={updateCompleted}
+        setCompletedButtonWord={'Complete'}
+        setUnavaliableText={`Still diddn't set any record yet.`}
+      />
+      {/* <div className="border">
         <h3>In Progressing</h3>
         <div className="row row-cols-3">
           {todolist
@@ -28,14 +97,24 @@ function CardGroup({ todolist }) {
                   <Cards 
                     todos={todos} 
                     setTodo={setTodo}
-                    deleteTodo={deleteTodo}
+                    setCompleted={updateCompleted}
                   />
                 </div>
               );
           })}
         </div>
-      </div>
-      <div className="border">
+      </div> */}
+      <CardSectors 
+        name={'Completed'}
+        todolist={todolist}
+        setTodo={setTodo}
+        setCompletedValue={true}
+        setCompletedFunction={revokeCompleted}
+        setCompletedButtonWord={'Revoke Complete'}
+        setUnavaliableText={`Currently haven't Completed Book`}
+      />
+
+      {/* <div className="border">
         <h3>Completed</h3>
         {todolist.filter(todos => todos.isfullyCompleted === true).length > 0 ?
           <div className="row row-cols-3">
@@ -47,7 +126,7 @@ function CardGroup({ todolist }) {
                     <Cards 
                       todos={todos} 
                       setTodo={setTodo}
-                      deleteTodo={deleteTodo}
+                      setCompleted={revokeCompleted}
                     />
                   </div>
                 )
@@ -57,7 +136,7 @@ function CardGroup({ todolist }) {
           </div>
           : <div>Currently Unavailable Completed Book</div>
         }
-      </div>
+      </div> */}
     </div>
 
   )

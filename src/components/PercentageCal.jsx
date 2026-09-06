@@ -18,7 +18,7 @@ export default function PercentageCal({ CurReadBookPage, MaxBookPage }) {
   return (
     <div>
       { ((currentIsMissing || current === 0) && (maximumIsMissing || maximum === 0)) ? 
-        '0' 
+        '0 %' 
       : (!Number.isFinite(current) || !Number.isFinite(maximum)) ?
         <div>Invalid page value</div>
       : (current > 0 && (maximumIsMissing || maximum === 0)) ? 
