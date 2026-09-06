@@ -22,10 +22,14 @@ function CardGroup({ todolist }) {
         <div className="row row-cols-3">
           {todolist
             .filter(todos => todos.isfullyCompleted === false)
-            .map((todos, index) => {
+            .map((todos) => {
               return (
-                <div key={index} className="mb-4">
-                  <Cards todos={todos} deleteTodo={deleteTodo}/>
+                <div key={todos.id} className="mb-4">
+                  <Cards 
+                    todos={todos} 
+                    setTodo={setTodo}
+                    deleteTodo={deleteTodo}
+                  />
                 </div>
               );
           })}
@@ -33,9 +37,26 @@ function CardGroup({ todolist }) {
       </div>
       <div className="border">
         <h3>Completed</h3>
-        <div>
+        {todolist.filter(todos => todos.isfullyCompleted === true).length > 0 ?
+          <div className="row row-cols-3">
+            {todolist
+              .filter(todos => todos.isfullyCompleted === true)
+              .map((todos) => {
+                return (
+                  <div key={todos.id}>
+                    <Cards 
+                      todos={todos} 
+                      setTodo={setTodo}
+                      deleteTodo={deleteTodo}
+                    />
+                  </div>
+                )
+              })
 
-        </div>
+            }
+          </div>
+          : <div>Currently Unavailable Completed Book</div>
+        }
       </div>
     </div>
 
