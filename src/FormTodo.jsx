@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import PercentageCal from './components/PercentageCal';
 
 export default function FormTodo({ 
@@ -11,7 +11,7 @@ export default function FormTodo({
   const [ description, setDescription ] = useState(originaltodo.description ?? '');
   const [ currentReadBookPage, setCurrentReadBookPage ] = useState(originaltodo.currentReadBookPage ?? '');
   const [ maximumBookPage, setMaximumBookPage ] = useState(originaltodo.maximumBookPage ?? '');
-  const [ notes, setNote ] = useState(originaltodo.notes && '');
+  const [ notes, setNote ] = useState(originaltodo.notes ?? '');
 
   const isPageOverMaximum =
     currentReadBookPage !== "" &&
@@ -61,48 +61,54 @@ export default function FormTodo({
           </Form.Group>
           <Form.Group>
             <Form.Label>Progress Pages</Form.Label>
-            <div className='d-flex gap-3'>
-              <div>
-                <div>Current Read Page</div>
-                <Form.Control 
-                  type="number" 
-                  value={currentReadBookPage}
-                  min={0}
-                  max={maximumBookPage}
-                  isInvalid={isPageOverMaximum}
-                  onChange={(e) => {
-                    const value = Number(e.target.value);
+            <Row className='g-3'>
+              <Col xs={12} md={4}>
+                <Form.Group>
+                  <Form.Label>Current Read Page</Form.Label>
+                  <Form.Control 
+                    type="number" 
+                    value={currentReadBookPage}
+                    min={0}
+                    max={maximumBookPage}
+                    isInvalid={isPageOverMaximum}
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
 
-                    if (value < 0) {
-                      setCurrentReadBookPage(0);
-                    } else {
-                      setCurrentReadBookPage(value)
-                    }                
-                  }}
-                />
-                <Form.Control.Feedback type="invalid">
-                  Current page cannot exceed the maximum page.
-                </Form.Control.Feedback>
-              </div>
-              <div>
-                <div>Maximum Page</div>
-                <Form.Control 
-                  type="number"
-                  min={0}
-                  value={maximumBookPage}
-                  onChange={(e) => setMaximumBookPage(Number(e.target.value))}
-                />
-              </div>
-              <div>
-                <div>Completed Percentage</div>
-                <div>
-                  <PercentageCal 
-                    CurReadBookPage={currentReadBookPage} 
-                    MaxBookPage={maximumBookPage}
+                      if (value < 0) {
+                        setCurrentReadBookPage(0);
+                      } else {
+                        setCurrentReadBookPage(value)
+                      }                
+                    }}
                   />
-                </div>  
-              </div>          
-            </div>
+                  <Form.Control.Feedback type="invalid">
+                    Current page cannot exceed the maximum page.
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Col>
+              <Col xs={12} md={4}>
+                <Form.Group>
+                  <Form.Label>Maximum Page</Form.Label>
+                  <Form.Control 
+                    type="number"
+                    min={0}
+                    value={maximumBookPage}
+                    onChange={(e) => setMaximumBookPage(Number(e.target.value))}
+                  />
+                </Form.Group>
+              </Col>
+              <Col xs={12} md={4}>
+                <Form.Group>
+                  <Form.Label>Completed Percentage</Form.Label>
+                  <div>
+                    <PercentageCal 
+                      CurReadBookPage={currentReadBookPage} 
+                      MaxBookPage={maximumBookPage}
+                    />
+                  </div>  
+                </Form.Group>
+              </Col>          
+            </Row>
           </Form.Group>
           <Form.Group>
             <Form.Label>Notes</Form.Label>

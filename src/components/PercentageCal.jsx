@@ -1,5 +1,5 @@
 export default function PercentageCal({ CurReadBookPage, MaxBookPage }) {
-  const NUM = CurReadBookPage / MaxBookPage;
+  const DisplayNum = Number((CurReadBookPage / MaxBookPage) * 100).toFixed(2);
 
   const current = Number(CurReadBookPage);
   const maximum = Number(MaxBookPage);
@@ -24,7 +24,7 @@ export default function PercentageCal({ CurReadBookPage, MaxBookPage }) {
       : (current > 0 && (maximumIsMissing || maximum === 0)) ? 
         <div>Require Maximum Page Value</div> 
       : (current > 0 && maximum !== 0) ? 
-        <div>{(NUM * 100).toFixed(2)} %</div> 
+        <div>{DisplayNum} %</div> 
       : 0 
       } 
     </div>

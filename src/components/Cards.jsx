@@ -1,39 +1,49 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, ProgressBar } from "react-bootstrap";
 import UpdateSetTodo from "./UpdateSetTodo";
 import PercentageCal from "./PercentageCal";
 
 function MainInfoComp({ todos }) {
   return (
-    <div className="border rounded-2 p-1">
+    <div>
       <h2>{todos.bookName}</h2>
       <div>{todos.authorName}</div>
-      <div>Target: {todos.description}</div>
-      <div>Notes: {todos.notes}</div>
+    </div>
+  )
+}
+
+function SubInfoComp({todos}) {
+  return (
+    <div className="my-4 d-flex flex-column gap-4">
+      <div>
+        <div className="mb-1">Target:</div>
+        <div className="text-break">{todos.description}</div>
+      </div>
+      <div>
+        <div className="mb-1">Notes:</div>
+        <div className="text-break">{todos.notes}</div>
+        
+      </div>
     </div>
   )
 }
 
 function PercentageComp({ todos }) {
+  const percentage =
+    (todos.currentReadBookPage / todos.maximumBookPage) * 100;
+
   return (
-    <div 
-      className="
-        border rounded-2 p-1
-        d-flex justify-content-between 
-      "
-    >
-      <div>
+    <div className="border rounded-2 p-1">
+      <div className="d-flex justify-content-between align-items-center gap-2">
         <h4>
           <PercentageCal 
             CurReadBookPage={todos.currentReadBookPage}
             MaxBookPage={todos.maximumBookPage}
           />
         </h4>
+        <div>Current Page: {todos.currentReadBookPage} / {todos.maximumBookPage}</div>
       </div>
-      <div>
-        <div>Current Page: {todos.currentReadBookPage}</div>
-        <div>Maximum Page: {todos.maximumBookPage}</div>
-      </div>
+      <ProgressBar now={percentage} />
     </div>
   )
 }
@@ -86,7 +96,7 @@ export default function Cards({
       border rounded-3
       shadow-sm
       d-flex flex-column 
-      gap-2 p-3
+      gap-4 p-3
       "
     >
       <UpdateSetTodo 
@@ -95,6 +105,7 @@ export default function Cards({
         setModal={setModal}
       />
       <MainInfoComp todos={todos} />
+      <SubInfoComp todos={todos} />
       <PercentageComp todos={todos} />
       <ButtonComp 
         todos={todos}
