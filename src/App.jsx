@@ -14,7 +14,6 @@ function Layout() {
         <Container>
           <Navbar.Brand href="/">Home</Navbar.Brand>
           <Nav>
-            {/* <Nav.Link href='/addtodos'>Add Todos</Nav.Link> */}
           </Nav>
         </Container>
       </Navbar>
@@ -25,14 +24,18 @@ function Layout() {
 
 export default function App() {
   const [ todo, setTodo ] = useLocalStorage('data', []);
+
+  const AppNameThemeSet = {
+    name: `Reading Tracker`,
+    descriptions: `Keep track of what you're reading`
+  };
   
   return (
-    <TodoContext.Provider value={{ todo, setTodo }}>
+    <TodoContext.Provider value={{ todo, setTodo, AppNameThemeSet }}>
       <BrowserRouter >
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            {/* <Route path="addtodos" element={<Addtodos />} /> */}
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>

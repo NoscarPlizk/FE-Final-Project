@@ -130,7 +130,10 @@ function CardGroup({ todolist }) {
 }
 
 export default function Home() {
-  const todo = useContext(TodoContext).todo;
+  const { todo, AppNameThemeSet } = useContext(TodoContext); 
+
+  const { name, descriptions } = AppNameThemeSet;
+
   const [ showModal, setShowModal ] = useState(false);
 
   const handleShow = () => setShowModal(true);
@@ -145,9 +148,9 @@ export default function Home() {
         >
           <div>
             <h1 className='mt-4 mb-3'>
-              MyBookist
+              {name}
             </h1>
-            <p>Keep track of what you're reading</p>
+            <p>{descriptions}</p>
           </div>
           <button 
             className="rounded-3"
