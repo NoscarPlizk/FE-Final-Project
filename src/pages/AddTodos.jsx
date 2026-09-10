@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import { TodoContext } from '../todoContext';
 import FormTodo from '../FormTodo';

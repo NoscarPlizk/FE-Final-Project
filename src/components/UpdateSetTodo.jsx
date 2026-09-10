@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useContext } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import { TodoContext } from '../todoContext';
@@ -46,7 +45,7 @@ export default function UpdateSetTodo({
       });
 
       setModal(false);
-      
+
     } else if (currentReadBookPage >= maximumBookPage) {
       return console.log("Update Todo Error:")
     }
