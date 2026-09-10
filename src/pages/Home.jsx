@@ -154,7 +154,7 @@ export default function Home() {
           </div>
           <button 
             className="rounded-3"
-            style={{ width: '100px', height: '60px'}}
+            style={{ width: '100px', height: '60px' }}
             onClick={handleShow}
           >
             Add Task

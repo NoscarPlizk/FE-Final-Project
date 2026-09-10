@@ -22,7 +22,13 @@ export default function FormTodo({
     <div className='p-3'>
       <div className='d-flex justify-content-between mb-3'>
         <h3 className='mt-5'>Add Your Book List</h3>
-        <button onClick={closeWindows}>X</button>
+        <button 
+          onClick={closeWindows}
+          className="rounded-3"
+          style={{ width: '70px', height: '60px' }}
+        >
+          X
+        </button>
       </div>
       <div>
         <Form 

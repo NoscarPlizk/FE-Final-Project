@@ -23,7 +23,7 @@ export default function PercentageCal({ CurReadBookPage, MaxBookPage }) {
         <div>Invalid page value</div>
       : (current > 0 && (maximumIsMissing || maximum === 0)) ? 
         <div>Require Maximum Page Value</div> 
-      : (current > 0 && !(current >= maximum) && maximum !== 0) ? 
+      : (current > 0 && !(current > maximum) && maximum !== 0) ? 
         <div>{DisplayNum} %</div> 
       : (current >= maximum && maximum !== 0) ? 
         <div>Overflow</div>
