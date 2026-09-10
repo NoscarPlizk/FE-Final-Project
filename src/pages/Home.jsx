@@ -96,24 +96,6 @@ function CardGroup({ todolist }) {
         setAnalysisState={'book currently being read'}
         setUnavaliableText={`Still diddn't set any record yet.`}
       />
-      {/* <div className="border">
-        <h3>In Progressing</h3>
-        <div className="row row-cols-3">
-          {todolist
-            .filter(todos => todos.isfullyCompleted === false)
-            .map((todos) => {
-              return (
-                <div key={todos.id} className="mb-4">
-                  <Cards 
-                    todos={todos} 
-                    setTodo={setTodo}
-                    setCompleted={updateCompleted}
-                  />
-                </div>
-              );
-          })}
-        </div>
-      </div> */}
       <CardSectors 
         name={'Completed'}
         todolist={todolist}

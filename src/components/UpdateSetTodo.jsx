@@ -59,32 +59,6 @@ export default function UpdateSetTodo({
           buttonExecuteFunction={updateTodo}
           closeWindows={() => setModal(false)}
         />
-        {/* <Form>
-          <Form.Group>
-            <Form.Label>New Book Name</Form.Label>
-            <Form.Control 
-              type="text" 
-              placeholder="update book name"
-              value={newName}
-              onChange={(e) => setNewName(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>New Description</Form.Label>
-            <Form.Control 
-              type="text" 
-              placeholder="update description" 
-              value={newDescription}
-              onChange={(e) => setNewDescription(e.target.value)}
-            />
-          </Form.Group>
-        </Form>
-        <Button 
-          variant="primary" 
-          onClick={() => updateTodo(idtodos, newName, newDescription)}
-        >
-          Update
-        </Button> */}
       </Modal.Body>
     </Modal>
   );
