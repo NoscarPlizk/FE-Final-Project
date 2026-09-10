@@ -94,7 +94,7 @@ export default function Cards({
   return (
     <div className="
       border rounded-3
-      shadow-sm
+      shadow-sm bg-white
       d-flex flex-column 
       gap-4 p-3
       "

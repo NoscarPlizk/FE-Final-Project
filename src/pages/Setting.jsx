@@ -11,19 +11,23 @@ export default function Setting() {
 
 
     return (
-        <div>
-            <Container>
-                <h1>Settings</h1>
-                <div className="mt-4">
-                    <label htmlFor="background-color">
-                        Background colour
+        <Container>
+            <div>
+                <br />
+                <h1 className=''>Settings</h1>
+                <div className="mt-4 d-flex">
+                    <label 
+                        htmlFor="background-color"
+                        className='me-3'
+                    >
+                        Background colour: 
                     </label>
                     <input
                         id="background-color"
                         type="color"
                         value={backgroundColor}
                         onChange={(event) =>
-                        setBackgroundColor(event.target.value)
+                            setBackgroundColor(event.target.value)
                         }
                         style={{ width: '100px' }}
                     />
@@ -38,7 +42,7 @@ export default function Setting() {
                 >
                     Reset colour
                 </Button>
-            </Container>
-        </div>
+            </div>
+        </Container>
     )
 }

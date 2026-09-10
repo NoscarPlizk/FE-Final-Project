@@ -20,30 +20,36 @@ export default function UpdateSetTodo({
     notes
   ){
 
-    setTodo(prev => {
-      const updatedTodos = prev.map(t => {
-        if (t.id !== idtodos) return t;
+    if (currentReadBookPage <= maximumBookPage) {
 
-        return {
-          ...t,
-          bookName,
-          authorName,
-          description,
-          currentReadBookPage,
-          maximumBookPage,
-          notes
-        };
+      setTodo(prev => {
+        const updatedTodos = prev.map(t => {
+          if (t.id !== idtodos) return t;
+
+          return {
+            ...t,
+            bookName,
+            authorName,
+            description,
+            currentReadBookPage,
+            maximumBookPage,
+            notes
+          };
+        });
+
+        const updatedTodo = updatedTodos.find(t => t.id === idtodos);
+
+        console.log("updated todo:", updatedTodo);
+        console.log("updated todo list:", updatedTodos);
+
+        return updatedTodos;
       });
 
-      const updatedTodo = updatedTodos.find(t => t.id === idtodos);
-
-      console.log("updated todo:", updatedTodo);
-      console.log("updated todo list:", updatedTodos);
-
-      return updatedTodos;
-    });
-
-    setModal(false);
+      setModal(false);
+      
+    } else if (currentReadBookPage >= maximumBookPage) {
+      return console.log("Update Todo Error:")
+    }
   }
 
   return (

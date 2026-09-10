@@ -28,7 +28,12 @@ export default function Addtodos({ closeWindows }) {
     }
 
     console.log({ saveTodo: saveTodo });
-    setTodo([ ...todo, saveTodo ]);
+
+    if (currentReadBookPage < maximumBookPage) {
+      return setTodo([ ...todo, saveTodo ]);
+    } else if (currentReadBookPage > maximumBookPage) {
+      return;
+    }
   }
 
   return (
