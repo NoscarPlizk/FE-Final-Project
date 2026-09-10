@@ -20,12 +20,17 @@ export default function FormTodo({
 
   return (
     <div className='p-3'>
-      <div className='d-flex justify-content-between mb-3'>
-        <h3 className='mt-5'>Add Your Book List</h3>
+      <div className='
+        d-flex 
+        justify-content-between align-items-center
+        mt-2 mb-3
+        '
+      >
+        <h3>Add Your Book List</h3>
         <button 
           onClick={closeWindows}
           className="rounded-3"
-          style={{ width: '70px', height: '60px' }}
+          style={{ width: '50px', height: '50px' }}
         >
           X
         </button>
@@ -127,6 +132,7 @@ export default function FormTodo({
           <Button 
             variant="primary" 
             type="submit"
+            className='mt-2'
             onClick={() => buttonExecuteFunction( 
               bookName, 
               authorName,
