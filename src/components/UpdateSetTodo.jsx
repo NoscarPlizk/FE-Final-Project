@@ -25,6 +25,22 @@ export default function UpdateSetTodo({
         const updatedTodos = prev.map(t => {
           if (t.id !== idtodos) return t;
 
+          if (
+            (t.isfullyCompleted === true) &&
+            (currentReadBookPage !== maximumBookPage)
+          ) {
+            return {
+              ...t,
+              bookName,
+              authorName,
+              description,
+              currentReadBookPage,
+              maximumBookPage,
+              notes,
+              isfullyCompleted: false
+            };
+          }
+
           return {
             ...t,
             bookName,
@@ -34,6 +50,7 @@ export default function UpdateSetTodo({
             maximumBookPage,
             notes
           };
+            
         });
 
         const updatedTodo = updatedTodos.find(t => t.id === idtodos);
