@@ -83,14 +83,21 @@ export default function FormTodo({
                     max={maximumBookPage}
                     isInvalid={isPageOverMaximum}
                     onChange={(e) => {
-                      const value = Number(e.target.value);
+                      const value = e.target.value;
 
-                      if (value < 0) {
-                        setCurrentReadBookPage(0);
+                      if (value === "") {
+                        setCurrentReadBookPage("");
+                      } else if (Number(value) < 0) {
+                        setCurrentReadBookPage("0");
                       } else {
-                        setCurrentReadBookPage(value)
-                      }                
+                        setCurrentReadBookPage(value);
+                      }          
                     }}
+                    // onBlur={() => {
+                    //   if (currentReadBookPage === "") {
+                    //     setCurrentReadBookPage("0");
+                    //   }
+                    // }}
                   />
                   <Form.Control.Feedback type="invalid">
                     Current page cannot exceed the maximum page.

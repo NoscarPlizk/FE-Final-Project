@@ -35,7 +35,7 @@ export default function App() {
   const [ backgroundColor, setBackgroundColor ] = useLocalStorage('backgroundColor', '#f8f9fa');
 
   const AppNameThemeSet = {
-    name: `Reading Tracker`,
+    name: `BookHaven Reading Tracker`,
     descriptions: `Keep track of what you're reading`
   };
   
